@@ -1,0 +1,43 @@
+body{
+  margin: 0;
+  background-color: #333;
+}
+.app{
+  /*min-height: 100vh;  */
+  display: flex;
+  justify-content: center;
+  padding: 100px;
+}
+.main{
+  width: 900px;
+  border:1px solid red;
+}
+.goods-wrap{
+  display: flex;
+  justify-content: space-around;
+}
+.goods-wrap img{
+  display: block;
+  width: 240px;
+  height: 200px;
+
+}
+.goods-wrap button{
+  width: 240px;
+  line-height: 40px;
+  border:0;
+  border-radius: 5px;
+  background-color: hotpink;
+  color:#fff;
+  margin-top: 20px;
+}
+.list-wrap{
+  width: 340px;
+  margin: 0 auto;
+  margin-top: 80px;
+  border:1px solid red;
+}
+
+.goods-wrap button.active{
+  background-color: #ccc;
+}

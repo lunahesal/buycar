@@ -8,7 +8,7 @@ class App extends Component {
     goods:[
       {
         id:1,
-        url:'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=952185356,2784269270&fm=27&gp=0.jpg',
+        url:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3037581219,857037345&fm=27&gp=0.jpg',
         price:43.00,
         name:'cake',
         count:1,

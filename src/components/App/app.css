@@ -3,14 +3,13 @@ body{
   background-color: #333;
 }
 .app{
-  /*min-height: 100vh;  */
+  min-height: 100vh;  
   display: flex;
   justify-content: center;
-  padding: 100px;
+  padding: 50px;
 }
 .main{
   width: 900px;
-  border:1px solid red;
 }
 .goods-wrap{
   display: flex;
@@ -34,8 +33,7 @@ body{
 .list-wrap{
   width: 340px;
   margin: 0 auto;
-  margin-top: 80px;
-  border:1px solid red;
+  margin-top: 50px;
 }
 
 .goods-wrap button.active{

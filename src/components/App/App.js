@@ -3,8 +3,8 @@ import './app.css'
 import List from '../List/List'
 class App extends Component {
   state = {
-    list:[],
-    total:'',
+    lists:[],
+    total:0,
     goods:[
       {
         id:1,
@@ -32,40 +32,39 @@ class App extends Component {
       }
     ]
   }
-  addClick = (t) => {
-    const {goods} = this.state
-    let newGoods = goods.map(re => {
-      if(re.id === t.id){
-        return {...re,clicked:true}
+  addClick = (id) => {
+    const {goods,lists} = this.state
+    const newGoods = goods.map(t => {
+      if(t.id === id){
+        return {...t,clicked:true}
       }
-      return re
+      return t
     })
+    const newLists = [...lists,goods.find(t => t.id === id)]
     this.setState({
       goods:newGoods,
-      list:[...this.state.list,this.state.goods.find(re => re.id === t.id)]
+      lists:newLists
     })
-    this.subTotal(t.price)
+    this.calTotal(newLists)
   }
 
-  subTotal = (n,text,count) => {
-    if(text == '-'){
-      this.setState({
-        total:Number(this.state.total) - Number(n)
-      })
-    }else {
-      this.setState({
-        total:Number(this.state.total) + Number(n)
-      })
-    }
+  calTotal = (lists) => {
+    this.setState({
+      total:lists.map(t=>t.price*t.count).reduce((sum,total)=>{
+        return sum + total
+      },0)
+    })
   }
 
   render() {
     const goods = this.state.goods.map(t => (
       <div key={t.id}>
         <img src={t.url} alt=""/>
-        <button onClick={() => this.addClick(t)}
+        <button onClick={() => this.addClick(t.id)}
           disabled={t.clicked && 'disabled'}
-          className={`${t.clicked && 'active'}`}>购买</button>
+          className={`${t.clicked && 'active'}`}>
+          {`${t.clicked ? '已购':'购买'}`}
+        </button>
       </div>
     ))
     return (
@@ -75,8 +74,8 @@ class App extends Component {
             {goods}
           </div>
           <div className="list-wrap">
-            <List list={this.state.list}
-              subTotal={this.subTotal}
+            <List lists={this.state.lists}
+              calTotal={this.calTotal}
               total={this.state.total}/>
           </div>
         </div>

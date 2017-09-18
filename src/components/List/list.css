@@ -1,5 +1,6 @@
 .list{
   position: relative;
+
 }
 .total{
   padding: 40px 0 50px;
@@ -45,7 +46,7 @@
 }
 .qty span{
   display: block;
-  color:#ccc;
+  color:#666;
   text-align: center;
 
 }

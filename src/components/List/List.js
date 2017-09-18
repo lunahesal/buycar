@@ -3,41 +3,37 @@ import './list.css'
 
 class List extends Component {
 
-  addClick = (t,n) => {
-    const { list,total ,subTotal}=this.props
-    let newList = list.map( re => {
-      if(re.id === t.id){
-        re.count++
-        subTotal(t.price,n)
+  addClick = (id) => {
+    const { lists,calTotal}=this.props
+    const newLists = lists.map( t => {
+      if(t.id === id){
+        t.count++
       }
       return t
     })
+    calTotal(newLists)
     this.setState({
-      list:newList
+      lists:newLists
     })
   }
 
-  minusClick = (t,n) => {
-    const { list,subTotal }=this.props
-    let newList = list.map( re => {
-      if(re.id === t.id){
-        re.count--
-        if(re.count === 0){
-          re.count=1
-        }
+  minusClick = (id) => {
+    const { lists,calTotal }=this.props
+    let newLists = lists.map( t => {
+      if(t.id === id && t.count !== 0){
+        t.count--
       }
-
-      subTotal(t.price,n)
-
       return t
     })
+    calTotal(newLists)
     this.setState({
-      list:newList
+      lists:newLists
     })
   }
   render() {
-    const { list,total }=this.props
-    const listEach = list.map(t => (
+    const { lists,total }=this.props
+      console.log(total)
+    const listEach = lists.map(t => (
       <div key={t.id} className='list-each'>
         <div className='imgbox'>
           <img src={t.url} alt=""/>
@@ -47,9 +43,9 @@ class List extends Component {
           <span>$ {t.price}</span>
         </div>
         <div className='qty'>
-          <span onClick={()=>this.minusClick(t,'-')} className='minus'>-</span>
+          <span onClick={()=>this.minusClick(t.id)} className='minus'>-</span>
           <span>{t.count}</span>
-          <span onClick={()=>this.addClick(t,'+')} className='add'>+</span>
+          <span onClick={()=>this.addClick(t.id)} className='add'>+</span>
         </div>
       </div>
     ))
@@ -57,7 +53,7 @@ class List extends Component {
     return (
       <div className="list">
         <div className="total">
-          {total}
+          { total === 0 ? '请添加商品到购物车' : total }
         </div>
         <div className="lists">
           {listEach}

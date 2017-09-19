@@ -7,7 +7,10 @@ class List extends Component {
     const { lists,calTotal}=this.props
     const newLists = lists.map( t => {
       if(t.id === id){
-        t.count++
+        this.setState({
+          count: t.count++
+        })
+
       }
       return t
     })
@@ -21,7 +24,9 @@ class List extends Component {
     const { lists,calTotal }=this.props
     let newLists = lists.map( t => {
       if(t.id === id && t.count !== 0){
-        t.count--
+        this.setState({
+          count: t.count--
+        })
       }
       return t
     })
